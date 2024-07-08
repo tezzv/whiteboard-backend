@@ -1,3 +1,2 @@
 [build]
-  publish = "build"  # Specify the directory to publish, e.g., "build" for a React app
-  command = "npm run build"  # Command to build your project
+    functions = "functions"
