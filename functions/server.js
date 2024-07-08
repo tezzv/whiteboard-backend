@@ -6,6 +6,7 @@ const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 const { addUser, getUser, removeUser, getUsersInRoom } = require("../utils/users");
 const serverless = require("serverless-http");
+const router = express.Router();
 
 const io = new Server(server);
 
