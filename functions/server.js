@@ -97,5 +97,5 @@ server.listen(port, () =>
     console.log("server is running on http://localhost:5000")
 );
 
-app.use("/.netlify/functions/app", router);
+app.use("/.netlify/functions/server", router);
 module.exports.handler = serverless(app);
