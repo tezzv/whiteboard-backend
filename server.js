@@ -4,11 +4,16 @@ const app = express();
 
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
-const { addUser, getUser, removeUser, getUsersInRoom } = require("../utils/users");
+const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users");
 const serverless = require("serverless-http");
 const router = express.Router();
 
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE"]
+    }
+});
 
 // routes
 app.get("/", (req, res) => {
@@ -93,10 +98,7 @@ io.on("connection", (socket) => {
 
 
 const port = process.env.PORT || 5000;
+server.listen(port, () => console.log(`Server is running on port ${port}`));
 
-server.listen(port, () =>
-    console.log("server is running on http://localhost:5000")
-);
-
-app.use("/.netlify/functions/server", router);
-module.exports.handler = serverless(app);
+// app.use("/.netlify/functions/server", router);
+// module.exports.handler = serverless(app);
