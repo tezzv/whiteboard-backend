@@ -22,6 +22,12 @@ app.get("/", (req, res) => {
     );
 });
 
+router.get("/", (req, res) => {
+    res.send(
+        "This is server for whiteboard app"
+    );
+});
+
 // let roomIdGlobal, imgURLGlobal;
 
 io.on("connection", (socket) => {
