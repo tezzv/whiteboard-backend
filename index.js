@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
-const server = require("http").createServer(app);
+// const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users");
+const http = require("http").createServer(app);
 
-
-const io = new Server(server, {
+const io = require("socket.io")(http, {
     cors: {
         origin: "https://whiteboard-frontend-henna.vercel.app",
         methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
         credentials: true
     }
 });
