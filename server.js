@@ -1,12 +1,9 @@
 const express = require("express");
 const app = express();
-// const { Socket } = require("socket.io");
-
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users");
-const serverless = require("serverless-http");
-const router = express.Router();
+
 
 const io = new Server(server, {
     cors: {
@@ -15,17 +12,9 @@ const io = new Server(server, {
     }
 });
 
-// routes
+// Routes
 app.get("/", (req, res) => {
-    res.send(
-        "This is server for whiteboard app"
-    );
-});
-
-router.get("/", (req, res) => {
-    res.send(
-        "This is server for whiteboard app"
-    );
+    res.send("This is the server for the whiteboard app");
 });
 
 // let roomIdGlobal, imgURLGlobal;
@@ -102,9 +91,6 @@ io.on("connection", (socket) => {
 });
 
 
-
+// Start server
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server is running on port ${port}`));
-
-// app.use("/.netlify/functions/server", router);
-// module.exports.handler = serverless(app);
