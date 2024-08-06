@@ -7,8 +7,9 @@ const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users"
 
 const io = new Server(server, {
     cors: {
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE"]
+        origin: "https://whiteboard-frontend-henna.vercel.app",
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
