@@ -4,10 +4,9 @@ const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users");
 
-
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: ["http://localhost:5173", "https://whiteboard-frontend-henna.vercel.app"],
         methods: ["GET", "POST", "PUT", "DELETE"]
     }
 });
