@@ -7,8 +7,11 @@ const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users"
 const io = new Server(server, {
     cors: {
         origin: ["http://localhost:5173", "https://whiteboard-frontend-henna.vercel.app"],
-        methods: ["GET", "POST", "PUT", "DELETE"]
-    }
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+    },
+    transports: ['websocket'],
+    allowEIO3: true // Add this line to allow Socket.IO v3 clients to connect
 });
 
 // Routes
@@ -16,11 +19,10 @@ app.get("/", (req, res) => {
     res.send("This is the server for the whiteboard app");
 });
 
-// let roomIdGlobal, imgURLGlobal;
 
 io.on("connection", (socket) => {
     let roomIdGlobal, imgURLGlobal;
-    // console.log("user connected1");
+    console.log("user connected1");
     socket.on("userJoined", (data) => {
         const { name, roomId, userId, host, presenter } = data;
         roomIdGlobal = roomId;
@@ -65,7 +67,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on("disconnect", () => {
-        // console.log("someone disconnected")
+        console.log("someone disconnected")
         // socket.broadcast.to(roomIdGlobal).emit("userLeftMessageBroadcasted", "Someone");
         // console.log(socket.id);
         const user = getUser(socket.id);
