@@ -16,6 +16,7 @@ const io = new Server(server, {
 
 // Routes
 app.get("/", (req, res) => {
+    console.log("get request");
     res.send("This is the server for the whiteboard app");
 });
 
